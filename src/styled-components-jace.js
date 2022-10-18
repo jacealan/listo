@@ -103,7 +103,7 @@ export const ListMarks = styled.div`
 `
 
 export const Mark = styled.div`
-  height: 116px;
+  height: 110px;
   max-width: 80px;
   margin-top: 10px;
   display: flex;
