@@ -62,10 +62,10 @@ const Home = () => {
             placeholder="What do you want to search?"
             value={word}
             onChange={onChange}
-            width={windowSize.listX - 150}
+            width={windowSize.listX - 170}
             // width={document.documentElement.clientWidth - 70}
           />
-          <Submit type="submit" value="NAVER" width={70} bgColor={"#04CE5C"} />
+          <Submit type="submit" value="NAVER" width={90} bgColor={"#04CE5C"} />
         </form>
       </DivRound>
       <DivRound bgColor={"#eee"} width={windowSize.listX}>
