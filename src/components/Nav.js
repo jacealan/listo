@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const Navigation = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-contents: center;
 `
 
