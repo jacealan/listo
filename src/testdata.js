@@ -7,8 +7,8 @@ export const userObj = {
 export const dataObj = {
   userId: "jace",
   title: "Jace's List",
-  search: "naver",
-  // search: "google",
+  // search: "naver",
+  search: "google",
   authorId: "jace",
   createdAt: 11234567890,
   updatedAt: 10987865453,
