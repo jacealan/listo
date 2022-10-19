@@ -99,7 +99,11 @@ const Home = () => {
           <Submit type="submit" value="NAVER" width={90} bgColor={"#04CE5C"} />
         </form>
       </DivRound>
-      <DivRound bgColor={"#eee"} width={windowSize.listX}>
+      <DivRound
+        bgColor={"#eee"}
+        boxShadow={"1px 1px 6px -1px #bbb"}
+        width={windowSize.listX}
+      >
         <Flex spaceAround>
           <div>
             <div>
