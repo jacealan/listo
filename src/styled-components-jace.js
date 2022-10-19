@@ -72,7 +72,7 @@ export const Submit = styled.input`
   ${props => props.width && css`
     width: ${props.width}px;
   `}
-  text-align: cetner;
+  text-align: center;
 `
 
 export const DivRound = styled.div`
