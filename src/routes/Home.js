@@ -58,7 +58,8 @@ const Home = ({ viewSize, swipe }) => {
             // width={document.documentElement.clientWidth - 70}
           />
           {dataObj.search === "naver" ? (
-            <Submit type="submit" value="N" width={50} bgColor={"#04CE5C"} />
+            // <Submit type="submit" value="N" width={50} bgColor={"#04CE5C"} />
+            <Submit type="submit" value="N" width={50} bgColor={"#777"} />
           ) : null}
           {dataObj.search === "google" ? (
             <Submit type="submit" value="G" width={50} bgColor={"#777"} />
