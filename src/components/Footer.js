@@ -26,6 +26,7 @@ const Footer = ({viewSize, swipe }) => {
           border-top: solid 1px #aaa;
           padding-top: 10px;
           line-height: 1.5;
+          color: #aaa;
         }
       `}</style>
     </>
