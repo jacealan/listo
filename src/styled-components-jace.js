@@ -13,6 +13,9 @@ export const Flex = styled.div`
   `}
   align-items: center;  
   text-align: cetner;
+  ${props => props.button && css`
+    cursor: pointer;
+  `}
 `
 
 export const FlexColumn = styled.div`
@@ -88,6 +91,9 @@ export const DivRound = styled.div`
   `}
   ${props => props.boxShadow && css`
     box-shadow: ${props.boxShadow};
+  `}
+  ${props => props.button && css`
+    cursor: pointer;
   `}
 `
 

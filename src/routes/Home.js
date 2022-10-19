@@ -19,9 +19,11 @@ import {
   List,
   Bookmark,
 } from "@styled-icons/evaicons-solid"
+import { Naver } from "@styled-icons/simple-icons"
+import { Google2 as Google } from "@styled-icons/icomoon"
 import { Stock } from "@styled-icons/remix-fill"
 
-import {userObj, dataObj} from "../testdata"
+import { userObj, dataObj } from "../testdata"
 console.log(userObj, dataObj)
 
 const Home = ({ viewSize, swipe }) => {
@@ -40,7 +42,6 @@ const Home = ({ viewSize, swipe }) => {
     }
   }
 
-
   return (
     <>
       <DivRound
@@ -55,12 +56,18 @@ const Home = ({ viewSize, swipe }) => {
             placeholder="What do you want to search?"
             value={word}
             onChange={onChange}
-            width={viewSize.width - 110}
+            width={viewSize.width - 130}
             // width={document.documentElement.clientWidth - 70}
           />
-          {dataObj.search === "naver" ? <Submit type="submit" value="N" width={30} bgColor={"#04CE5C"} /> : null}
-          {dataObj.search === "google" ? <Submit type="submit" value="G" width={30} bgColor={"#777"} /> : null}
-          
+          {dataObj.search === "naver" ? (
+            <Submit type="submit" value="N" width={50} bgColor={"#04CE5C"} />
+            // <DivRound button><Naver onClick={onSubmit} size="30" color="#aaa" /></DivRound>
+          ) : null}
+          {dataObj.search === "google" ? (
+            <Submit type="submit" value="G" width={50} bgColor={"#777"} />
+            // <Submit type="submit"><Google /></Submit>
+            // <Google onClick={onSubmit} size="30" color="#aaa" />
+          ) : null}
         </form>
       </DivRound>
 
