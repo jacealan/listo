@@ -55,11 +55,11 @@ const Home = ({ viewSize, swipe }) => {
             placeholder="What do you want to search?"
             value={word}
             onChange={onChange}
-            width={viewSize.width - 114}
+            width={viewSize.width - 110}
             // width={document.documentElement.clientWidth - 70}
           />
-          {dataObj.search === "naver" ? <Submit type="submit" value="N" width={34} bgColor={"#04CE5C"} /> : null}
-          {dataObj.search === "google" ? <Submit type="submit" value="G" width={34} bgColor={"#777"} /> : null}
+          {dataObj.search === "naver" ? <Submit type="submit" value="N" width={30} bgColor={"#04CE5C"} /> : null}
+          {dataObj.search === "google" ? <Submit type="submit" value="G" width={30} bgColor={"#777"} /> : null}
           
         </form>
       </DivRound>

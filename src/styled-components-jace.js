@@ -61,7 +61,7 @@ export const Submit = styled.input`
   // border: solid 1px #444;
   border: none;
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 0;
   outline: none;
   background-color: #f5f5f5;
   ${props => props.bgColor && css`
