@@ -1,22 +1,45 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+
+import { Flex } from "../styled-components-jace"
+import { Square, Grid } from "@styled-icons/evaicons-solid"
+import { UserRectangle } from "@styled-icons/boxicons-solid"
+
+import { userObj, dataObj } from "../testdata"
 
 const Navigation = styled.div`
+  padding: 10px 0 0 0;
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width}px;
+    `}
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-contents: center;
 `
 
-const Nav = ({ userObj }) => {
+const Nav = ({ userObj, viewSize, swipe }) => {
   return (
     <>
-      <Navigation>
+      <Navigation width={viewSize.width}>
         <Link to="/profile">
-          {userObj ? userObj.displayName : "Anonymous"}
+          <Flex>
+            <Square size="24" color="#777" />
+            {dataObj ? dataObj.title : "Title"}
+          </Flex>
         </Link>
-        <Link to="/">LiSTo</Link>
+        <Link to="/">
+          <Flex right>
+            <UserRectangle size="20" color="#777" />
+            {userObj ? userObj.displayName : "Anonymous"}
+            &nbsp;
+            <Grid size="20" color="#777" />
+            LiSTo
+          </Flex>
+        </Link>
       </Navigation>
       {/* <ul>
         <li><Link to="/">Home</Link></li>

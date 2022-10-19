@@ -1,26 +1,28 @@
 import { useState, useEffect } from "react"
+
 import { Flex } from "../styled-components-jace"
 import { LogoVercel, LogoGithub } from "@styled-icons/ionicons-solid"
 
-const Footer = () => {
+const Footer = ({viewSize, swipe }) => {
   return (
     <>
       <footer>
         <Flex spaceAround>
-          <div>
-            Hosting on <LogoVercel size="16" />
+          <Flex>
+            Hosting on  &nbsp;<LogoVercel size="16" />
             Vercel
-          </div>
-          <div>
+          </Flex>
+          <Flex>
             <LogoGithub size="16" />
-            jacealan/listo
-          </div>
+            &nbsp;jacealan/listo
+          </Flex>
         </Flex>
         <div>&copy; LiSTo {new Date().getFullYear()}</div>
       </footer>
       <style jsx>{`
         footer {
-          margin: 10px;
+          width: ${viewSize.width}px;
+          margin: 30px;
           border-top: solid 1px #aaa;
           padding-top: 10px;
           line-height: 1.5;

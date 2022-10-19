@@ -11,7 +11,7 @@ import {
   Mark,
   Icon,
 } from "../styled-components-jace"
-import styled from "styled-components"
+// import styled from "styled-components"
 import {
   Search,
   Grid,
@@ -21,10 +21,10 @@ import {
 } from "@styled-icons/evaicons-solid"
 import { Stock } from "@styled-icons/remix-fill"
 
-import dataObj from "../testdata"
-console.log(dataObj)
+import {userObj, dataObj} from "../testdata"
+console.log(userObj, dataObj)
 
-const Home = () => {
+const Home = ({ viewSize, swipe }) => {
   const [word, setWord] = useState("")
   const onChange = (event) => {
     const {
@@ -33,79 +33,13 @@ const Home = () => {
     setWord(value)
   }
   const onSubmit = () => {
-    window.open(`https://search.naver.com/search.naver?query=${word}`)
-    // window.open(`https://www.google.com/search?q=${word}`)
-  }
-
-  // Window Size
-  const [viewSize, setViewSize] = useState({
-    width: document.documentElement.clientWidth,
-    height: document.documentElement.clientHeight,
-    page: 2,
-    pageWidth: 540,
-    pageItem: 6,
-  })
-  const onChangeSize = () => {
-    const contentWidth =
-      document.documentElement.clientWidth < 1090
-        ? document.documentElement.clientWidth
-        : 1090
-    if (contentWidth >= 730) {
-      setViewSize({
-        width: contentWidth,
-        height: document.documentElement.clientHeight,
-        page: 2,
-        pageWidth: (contentWidth - 30) / 2,
-        pageItem: 4,
-      })
-    } else if (contentWidth >= 540) {
-      setViewSize({
-        width: contentWidth,
-        height: document.documentElement.clientHeight,
-        page: 1,
-        pageWidth: contentWidth,
-        pageItem: 6,
-      })
-    } else if (contentWidth >= 360) {
-      setViewSize({
-        width: contentWidth,
-        height: document.documentElement.clientHeight,
-        page: 1,
-        pageWidth: contentWidth,
-        pageItem: 4,
-      })
-    }
-    // console.log(viewSize)
-  }
-
-  // Swipe
-  let initX, initY
-  const [swipe, setSwipe] = useState(null)
-  const onPointerMove = (event) => {
-    const diffX = initX - event.clientX
-    const diffY = initY - event.clientY
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX > 100) {
-        console.log("left")
-        setSwipe("left")
-      } else if (diffX < -100) {
-        console.log("right")
-        setSwipe("right")
-      }
+    if (dataObj.search === "naver") {
+      window.open(`https://search.naver.com/search.naver?query=${word}`)
+    } else if (dataObj.search === "google") {
+      window.open(`https://www.google.com/search?q=${word}`)
     }
   }
-  const onSwipe = (event) => {
-    initX = event.clientX
-    initY = event.clientY
-    window.addEventListener("pointerup", onPointerMove)
-  }
 
-  useEffect(() => {
-    onChangeSize()
-    window.addEventListener("resize", onChangeSize)
-    window.addEventListener("orientationchange", onChangeSize)
-    window.addEventListener("pointerdown", onSwipe)
-  }, [])
 
   return (
     <>
@@ -121,10 +55,12 @@ const Home = () => {
             placeholder="What do you want to search?"
             value={word}
             onChange={onChange}
-            width={viewSize.width - 170}
+            width={viewSize.width - 110}
             // width={document.documentElement.clientWidth - 70}
           />
-          <Submit type="submit" value="NAVER" width={90} bgColor={"#04CE5C"} />
+          {dataObj.search === "naver" ? <Submit type="submit" value="N" width={30} bgColor={"#04CE5C"} /> : null}
+          {dataObj.search === "google" ? <Submit type="submit" value="G" width={30} bgColor={"#777"} /> : null}
+          
         </form>
       </DivRound>
 
@@ -133,7 +69,6 @@ const Home = () => {
         boxShadow={"1px 1px 6px -1px #bbb"}
         width={viewSize.width}
       >
-
         <Flex spaceAround>
           <div>
             <div>
@@ -181,7 +116,11 @@ const Home = () => {
           </div>
         </Flex>
 
-        <ListPages bgColor={"#e0e0e0"} page={viewSize.page} width={viewSize.contentWidth}>
+        <ListPages
+          bgColor={"#e0e0e0"}
+          page={viewSize.page}
+          width={viewSize.contentWidth}
+        >
           <PageMarks bgColor={"#fafafa"}>
             <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
               <Mark>
@@ -260,7 +199,7 @@ const Home = () => {
               </Mark>
             </GroupMarks>
           </PageMarks>
-          
+
           <PageMarks bgColor={"#fafafa"}>
             <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
               <Mark>
