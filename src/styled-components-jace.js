@@ -91,7 +91,7 @@ export const DivRound = styled.div`
 `
 
 export const ListMarks = styled.div`
-  // margin-bottom: 10px;
+  padding: 0 5px;
   ${props => props.width && css`
     width: ${props.width}px;
   `}
@@ -108,8 +108,7 @@ export const Mark = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  
+  justify-content: flex-start;  
   align-items: center;
   text-align: cetner;
   font-size: 14px;
