@@ -5,7 +5,9 @@ import {
   Input,
   Submit,
   DivRound,
-  ListMarks,
+  ListPages,
+  PageMarks,
+  GroupMarks,
   Mark,
   Icon,
 } from "../styled-components-jace"
@@ -36,18 +38,44 @@ const Home = () => {
   }
 
   // Window Size
-  const [windowSize, setWindowSize] = useState({ x: 960, y: 960 })
+  const [viewSize, setViewSize] = useState({
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
+    page: 2,
+    pageWidth: 540,
+    pageItem: 6,
+  })
   const onChangeSize = () => {
     const contentWidth =
-      document.documentElement.clientWidth < 960
+      document.documentElement.clientWidth < 1090
         ? document.documentElement.clientWidth
-        : 960
-    setWindowSize({
-      x: contentWidth,
-      y: window.innerHeight,
-      listX: contentWidth > 480 ? 480 : contentWidth,
-      listY: window.innerHeight,
-    })
+        : 1090
+    if (contentWidth >= 730) {
+      setViewSize({
+        width: contentWidth,
+        height: document.documentElement.clientHeight,
+        page: 2,
+        pageWidth: (contentWidth - 30) / 2,
+        pageItem: 4,
+      })
+    } else if (contentWidth >= 540) {
+      setViewSize({
+        width: contentWidth,
+        height: document.documentElement.clientHeight,
+        page: 1,
+        pageWidth: contentWidth,
+        pageItem: 6,
+      })
+    } else if (contentWidth >= 360) {
+      setViewSize({
+        width: contentWidth,
+        height: document.documentElement.clientHeight,
+        page: 1,
+        pageWidth: contentWidth,
+        pageItem: 4,
+      })
+    }
+    // console.log(viewSize)
   }
 
   // Swipe
@@ -84,7 +112,7 @@ const Home = () => {
       <DivRound
         bgColor={"#f5f5f5"}
         boxShadow={"1px 1px 6px -1px #bbb"}
-        width={windowSize.listX}
+        width={viewSize.width}
       >
         <form onSubmit={onSubmit}>
           <Search size="30" color="#aaa" />
@@ -93,17 +121,19 @@ const Home = () => {
             placeholder="What do you want to search?"
             value={word}
             onChange={onChange}
-            width={windowSize.listX - 170}
+            width={viewSize.width - 170}
             // width={document.documentElement.clientWidth - 70}
           />
           <Submit type="submit" value="NAVER" width={90} bgColor={"#04CE5C"} />
         </form>
       </DivRound>
+
       <DivRound
         bgColor={"#eee"}
         boxShadow={"1px 1px 6px -1px #bbb"}
-        width={windowSize.listX}
+        width={viewSize.width}
       >
+
         <Flex spaceAround>
           <div>
             <div>
@@ -150,9 +180,10 @@ const Home = () => {
             </div>
           </div>
         </Flex>
-        <DivRound bgColor={"#fff"}>
-          <FlexColumn center>
-            <ListMarks width={windowSize.listX}>
+
+        <ListPages bgColor={"#e0e0e0"} page={viewSize.page} width={viewSize.contentWidth}>
+          <PageMarks bgColor={"#fafafa"}>
+            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
               <Mark>
                 <Icon>1</Icon>
                 <div>icon 1</div>
@@ -189,8 +220,8 @@ const Home = () => {
                 <Icon>9</Icon>
                 <div>icon 9</div>
               </Mark>
-            </ListMarks>
-            <ListMarks width={windowSize.listX}>
+            </GroupMarks>
+            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
               <Mark>
                 <Icon>1</Icon>
                 <div>icon 1</div>
@@ -227,9 +258,88 @@ const Home = () => {
                 <Icon>9</Icon>
                 <div>icon 9</div>
               </Mark>
-            </ListMarks>
-          </FlexColumn>
-        </DivRound>
+            </GroupMarks>
+          </PageMarks>
+          
+          <PageMarks bgColor={"#fafafa"}>
+            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
+              <Mark>
+                <Icon>1</Icon>
+                <div>icon 1</div>
+              </Mark>
+              <Mark>
+                <Icon>2</Icon>
+                <div>icon 2 2354 21345</div>
+              </Mark>
+              <Mark>
+                <Icon>3</Icon>
+                <div>icon 3</div>
+              </Mark>
+              <Mark>
+                <Icon>4</Icon>
+                <div>icon 4</div>
+              </Mark>
+              <Mark>
+                <Icon>5</Icon>
+                <div>icon 5</div>
+              </Mark>
+              <Mark>
+                <Icon>6</Icon>
+                <div>icon 6</div>
+              </Mark>
+              <Mark>
+                <Icon>7</Icon>
+                <div>icon 7</div>
+              </Mark>
+              <Mark>
+                <Icon>8</Icon>
+                <div>icon 8</div>
+              </Mark>
+              <Mark>
+                <Icon>9</Icon>
+                <div>icon 9</div>
+              </Mark>
+            </GroupMarks>
+            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
+              <Mark>
+                <Icon>1</Icon>
+                <div>icon 1</div>
+              </Mark>
+              <Mark>
+                <Icon>2</Icon>
+                <div>icon 2 2354 21345</div>
+              </Mark>
+              <Mark>
+                <Icon>3</Icon>
+                <div>icon 3</div>
+              </Mark>
+              <Mark>
+                <Icon>4</Icon>
+                <div>icon 4</div>
+              </Mark>
+              <Mark>
+                <Icon>5</Icon>
+                <div>icon 5</div>
+              </Mark>
+              <Mark>
+                <Icon>6</Icon>
+                <div>icon 6</div>
+              </Mark>
+              <Mark>
+                <Icon>7</Icon>
+                <div>icon 7</div>
+              </Mark>
+              <Mark>
+                <Icon>8</Icon>
+                <div>icon 8</div>
+              </Mark>
+              <Mark>
+                <Icon>9</Icon>
+                <div>icon 9</div>
+              </Mark>
+            </GroupMarks>
+          </PageMarks>
+        </ListPages>
       </DivRound>
     </>
   )

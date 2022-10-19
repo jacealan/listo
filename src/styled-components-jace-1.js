@@ -90,42 +90,7 @@ export const DivRound = styled.div`
   `}
 `
 
-export const ListPages = styled.div`
-  ${props => props.width && css`
-    width: ${props.width}px;
-  `}
-  margin: 10px auto 0 auto;
-  border-radius: 20px;
-  padding: 10px 0;
-  background-color: #ddd;
-  ${props => props.bgColor && css`
-    background-color: ${props.bgColor};
-  `}
-  ${props => props.boxShadow && css`
-    box-shadow: ${props.boxShadow};
-  `}
-  display: grid;
-  grid-template-columns: repeat(${props => props.page}, 1fr);
-`
-
-export const PageMarks = styled(FlexColumn)`
-  justify-content: center;
-  ${props => props.width && css`
-    width: ${props.width}px;
-  `}
-  margin: 10px auto 0 auto;
-  border-radius: 20px;
-  padding: 10px 0;
-  background-color: #f5f5f5;
-  ${props => props.bgColor && css`
-    background-color: ${props.bgColor};
-  `}
-  ${props => props.boxShadow && css`
-    box-shadow: ${props.boxShadow};
-  `}
-`
-
-export const GroupMarks = styled.div`
+export const ListMarks = styled.div`
   padding: 0 5px;
   ${props => props.width && css`
     width: ${props.width}px;
