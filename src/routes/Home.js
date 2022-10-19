@@ -59,10 +59,10 @@ const Home = ({ viewSize, swipe }) => {
           />
           {dataObj.search === "naver" ? (
             // <Submit type="submit" value="N" width={50} bgColor={"#04CE5C"} />
-            <Submit type="submit" value="N" width={50} bgColor={"#777"} />
+            <Submit type="submit" value="N" width={50} bgColor={"#aaa"} />
           ) : null}
           {dataObj.search === "google" ? (
-            <Submit type="submit" value="G" width={50} bgColor={"#777"} />
+            <Submit type="submit" value="G" width={50} bgColor={"#aaa"} />
           ) : null}
         </form>
       </DivRound>
