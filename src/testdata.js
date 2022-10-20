@@ -12,10 +12,13 @@ export const dataObj = {
   authorId: "jace",
   createdAt: 11234567890,
   updatedAt: 10987865453,
-  pages: [
+  bookMarks: [
     {
-      pageId: 1,
+      bookMarkId: 1,
+      authorId: "jace",
+      modifiedId: "jace2",
       createdAt: 11234567890,
+      modifiedAt: 23978434598,
       updatedAt: 10987865453,
       groups: [
         {
@@ -67,8 +70,11 @@ export const dataObj = {
     },
     
     {
-      pageId: 2,
+      bookMarkId: 2,
+      authorId: "jace",
+      modifiedId: "jace2",
       createdAt: 11234567890,
+      modifiedAt: 23978434598,
       updatedAt: 10987865453,
       groups: [
         {
@@ -118,6 +124,15 @@ export const dataObj = {
         },
       ],
     },
+  ],
+  movieMarks: [
+
+  ],
+  finMarks: [
+
+  ],
+  noteMarks: [
+
   ]
   
 }
