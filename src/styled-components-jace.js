@@ -185,7 +185,7 @@ export const Icon = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   &:hover {
     transform: scale(1.1);
