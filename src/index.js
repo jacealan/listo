@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import ReactDOM from "react-dom/client"
 import "./index.css"
 import App from "./components/App"
@@ -9,3 +9,6 @@ root.render(
     <App />
   </React.StrictMode>
 )
+useEffect(() => {
+  window.scrollTo(0, 1)
+}, [])
