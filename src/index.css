@@ -5,6 +5,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* IE and Edge */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+}
+/* Chrome, Safari, Opera*/
+*::-webkit-scrollbar {
+  display: none;
 }
 
 input, textarea {
@@ -25,14 +33,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333;
-  /* IE and Edge */
-  /* -ms-overflow-style: none; */
-  /* Firefox */
-  /* scrollbar-width: none; */
-}
-/* Chrome, Safari, Opera*/
-::-webkit-scrollbar {
-  display: none;
 }
 
 code {
