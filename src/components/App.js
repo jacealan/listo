@@ -115,14 +115,13 @@ function App() {
   return (
     <div className="App">
       {init ? (
-        // <AppRouter
-        //   refreshUser={refreshUser}
-        //   isLoggedIn={Boolean(userObj)}
-        //   userObj={userObj}
-        //   viewSize={viewSize}
-        //   swipe={swipe}
-        // />
-        <div>test</div>
+        <AppRouter
+          refreshUser={refreshUser}
+          isLoggedIn={Boolean(userObj)}
+          userObj={userObj}
+          viewSize={viewSize}
+          swipe={swipe}
+        />
       ) : (
         "Initializing..."
       )}
