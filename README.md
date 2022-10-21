@@ -29,3 +29,6 @@ https://listo-jace.vercel.app/
 - GIPHY: https://giphy.com/
 
 ## Reference
+- flaticon: https://www.flaticon.com/
+- IconScout: https://iconscout.com/
+- UUID: https://www.uuidgenerator.net/version4

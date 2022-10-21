@@ -3,7 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Auth from "../routes/Auth"
 import Home from "../routes/Home"
 import Profile from "../routes/Profile"
+import { financemarkObj } from "../testdata"
 import Nav from "./Nav"
+
+// Routing
+// /
+// /home/:id
+// /bookmark
+// /bookmark/:id
+// /videomark
+// /videomark/:id
+// /financemark
+// /financemark/:id
+// /auth
+// /profile
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj, viewSize, swipe }) => {
   return (

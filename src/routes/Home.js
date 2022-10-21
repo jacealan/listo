@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+
 import {
   Flex,
   FlexColumn,
@@ -12,6 +13,7 @@ import {
   Icon,
 } from "../styled-components-jace"
 // import styled from "styled-components"
+
 import {
   Search,
   Grid,
@@ -21,8 +23,15 @@ import {
 } from "@styled-icons/evaicons-solid"
 import { Stock } from "@styled-icons/remix-fill"
 
-import { userObj, dataObj } from "../testdata"
-console.log(userObj, dataObj)
+import {
+  userObj,
+  dataObj,
+  bookmarkObj,
+  videomarkObj,
+  financemarkObj,
+  notemarkObj,
+} from "../testdata"
+// console.log(userObj, dataObj)
 
 const Home = ({ viewSize, swipe }) => {
   const [word, setWord] = useState("")
@@ -124,6 +133,31 @@ const Home = ({ viewSize, swipe }) => {
           page={viewSize.page}
           width={viewSize.contentWidth}
         >
+          {dataObj.bookmarks.map((id, pageIdx) => (
+            <PageMarks bgColor={"#fafafa"}>
+              {bookmarkObj[id].page.map((group, groupIdx) => (
+                <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
+                  {group.map((mark, markIdx) => (
+                    <Mark>
+                      <a href={mark.url} target="_blank">
+                        {mark.thumbnail ? (
+                          <Icon src={mark.thumbnail} width="78" />
+                        ) : (
+                          <Icon bgColor={mark.bgColor} color={mark.color}>
+                            {mark.title}
+                          </Icon>
+                        )}
+                      </a>
+                      <div>
+                        {mark.title}
+                        {/* {pageIdx}-{groupIdx}-{markIdx} */}
+                      </div>
+                    </Mark>
+                  ))}
+                </GroupMarks>
+              ))}
+            </PageMarks>
+          ))}
           <PageMarks bgColor={"#fafafa"}>
             <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
               <Mark>

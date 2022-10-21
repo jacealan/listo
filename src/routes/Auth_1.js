@@ -109,9 +109,13 @@ const Auth = () => {
           </div>
         </form>
       </DivRound>
+      {/* <div>{error}</div>
+      <div onClick={toggleAccount}>
+        {newAccount ? "Sing In" : "Create Account"}
+      </div> */}
       <div>
-        <button
-          className="round"
+        <DivRound
+          button
           onClick={onSocialClick}
           name="google"
           bgColor={"#777"}
@@ -119,9 +123,9 @@ const Auth = () => {
           boxShadow={"1px 1px 6px -1px #bbb"}
         >
           Continue with Google
-        </button>
-        <button
-          className="round"
+        </DivRound>
+        <DivRound
+          button
           onClick={onSocialClick}
           name="github"
           bgColor={"#444"}
@@ -129,7 +133,7 @@ const Auth = () => {
           boxShadow={"1px 1px 6px -1px #bbb"}
         >
           Continue with Github
-        </button>
+        </DivRound>
       </div>
       <style jsx>{`
         .auth_email {
@@ -139,18 +143,6 @@ const Auth = () => {
             "email sign" 50px
             "password sign" 50px
             / 1fr 100px;
-        }
-        .round {
-          cursor: pointer;
-          width: 100%;
-          margin: 10px auto 0 auto;
-          border: none;
-          border-radius: 20px;
-          padding: 10px 0;
-          box-shadow: 1px 1px 6px -1px #bbb;
-          background-color: #444;
-          color: white;
-          font-size: 18px;
         }
       `}</style>
     </div>

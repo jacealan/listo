@@ -30,22 +30,22 @@ const Nav = ({ userObj, viewSize, swipe }) => {
   return (
     <>
       <Navigation width={viewSize.width}>
-        <Link to="/profile">
-          <Flex>
+        <Flex>
+          <Link to="/">
             <Square size="24" color="#777" />
             &nbsp;
             {dataObj ? dataObj.title : "Title"}
-          </Flex>
-        </Link>
-        <Link to="/">
-          <Flex right>
+          </Link>
+        </Flex>
+        <Flex right>
+          <Link to="/profile">
             <UserRectangle size="20" color="#777" />
             {userObj ? userObj.displayName : "Anonymous"}
-            &nbsp;&nbsp;
-            <Grid size="20" color="#777" />
-            LiSTo
-          </Flex>
-        </Link>
+          </Link>
+          &nbsp;&nbsp;
+          <Grid size="20" color="#777" />
+          LiSTo
+        </Flex>
       </Navigation>
       {/* <ul>
         <li><Link to="/">Home</Link></li>

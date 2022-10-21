@@ -71,6 +71,9 @@ export const Submit = styled.input`
     background-color: ${props.bgColor};
   `}
   color: #eee;
+  ${props => props.color && css`
+    color: ${props.color};
+  `}
   font-size: 1rem;
   ${props => props.width && css`
     width: ${props.width}px;
@@ -88,6 +91,9 @@ export const DivRound = styled.div`
   background-color: #f5f5f5;
   ${props => props.bgColor && css`
     background-color: ${props.bgColor};
+  `}
+  ${props => props.color && css`
+    color: ${props.color};
   `}
   ${props => props.boxShadow && css`
     box-shadow: ${props.boxShadow};
@@ -163,11 +169,26 @@ export const Icon = styled.div`
   margin: 0 0 5px 0;
   border-radius: 5px;
   padding: 5px;
-  background-color: white;
+  ${props => props.src && css`
+    background-image: url(${props.src});
+    background-size: cover;
+  `}
+  background-color: #fff;
+  ${props => props.bgColor && css`
+    background-color: ${props.bgColor};
+  `}
+  color: #444;
+  background-color: #fff;
+  ${props => props.color && css`
+    color: ${props.color};
+  `}
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 600;
+  &:hover {
+    transform: scale(1.1);
+  }
 `
