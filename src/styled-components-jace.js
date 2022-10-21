@@ -163,8 +163,8 @@ export const Mark = styled.div`
 `
 
 export const Icon = styled.div`
-  width: 76px;
-  height: 76px;
+  width: 64px;
+  height: 64px;
   box-shadow: 1px 1px 6px -1px #ccc;
   margin: 0 0 5px 0;
   border-radius: 12px;
