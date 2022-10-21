@@ -122,7 +122,7 @@ export const ListPages = styled.div`
 `
 
 export const PageMarks = styled(FlexColumn)`
-  justify-content: center;
+  justify-content: flex-start;
   ${props => props.width && css`
     width: ${props.width}px;
   `}
@@ -159,7 +159,7 @@ export const Mark = styled.div`
   justify-content: flex-start;  
   align-items: center;
   text-align: cetner;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 export const Icon = styled.div`
@@ -167,7 +167,7 @@ export const Icon = styled.div`
   height: 76px;
   box-shadow: 1px 1px 6px -1px #ccc;
   margin: 0 0 5px 0;
-  border-radius: 5px;
+  border-radius: 12px;
   padding: 5px;
   ${props => props.src && css`
     background-image: url(${props.src});
@@ -178,7 +178,6 @@ export const Icon = styled.div`
     background-color: ${props.bgColor};
   `}
   color: #444;
-  background-color: #fff;
   ${props => props.color && css`
     color: ${props.color};
   `}

@@ -134,13 +134,13 @@ const Home = ({ viewSize, swipe }) => {
           width={viewSize.contentWidth}
         >
           {dataObj.bookmarks.map((id, pageIdx) => (
-            <PageMarks bgColor={"#fafafa"}>
+            <PageMarks key={pageIdx} bgColor={"#fafafa"}>
               {bookmarkObj[id].page.map((group, groupIdx) => (
-                <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
+                <GroupMarks key={groupIdx} width={viewSize.pageWidth} item={viewSize.pageItem}>
                   {group.map((mark, markIdx) => (
-                    <Mark>
-                      <a href={mark.url} target="_blank">
-                        {mark.thumbnail ? (
+                    <Mark key={markIdx}>
+                      <a href={mark.url} target="_blank" rel="noreferrer">
+                        {mark.thumbnail? (
                           <Icon src={mark.thumbnail} width="78" />
                         ) : (
                           <Icon bgColor={mark.bgColor} color={mark.color}>
@@ -150,7 +150,6 @@ const Home = ({ viewSize, swipe }) => {
                       </a>
                       <div>
                         {mark.title}
-                        {/* {pageIdx}-{groupIdx}-{markIdx} */}
                       </div>
                     </Mark>
                   ))}
@@ -158,163 +157,6 @@ const Home = ({ viewSize, swipe }) => {
               ))}
             </PageMarks>
           ))}
-          <PageMarks bgColor={"#fafafa"}>
-            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
-              <Mark>
-                <Icon>1</Icon>
-                <div>icon 1</div>
-              </Mark>
-              <Mark>
-                <Icon>2</Icon>
-                <div>icon 2 2354 21345</div>
-              </Mark>
-              <Mark>
-                <Icon>3</Icon>
-                <div>icon 3</div>
-              </Mark>
-              <Mark>
-                <Icon>4</Icon>
-                <div>icon 4</div>
-              </Mark>
-              <Mark>
-                <Icon>5</Icon>
-                <div>icon 5</div>
-              </Mark>
-              <Mark>
-                <Icon>6</Icon>
-                <div>icon 6</div>
-              </Mark>
-              <Mark>
-                <Icon>7</Icon>
-                <div>icon 7</div>
-              </Mark>
-              <Mark>
-                <Icon>8</Icon>
-                <div>icon 8</div>
-              </Mark>
-              <Mark>
-                <Icon>9</Icon>
-                <div>icon 9</div>
-              </Mark>
-            </GroupMarks>
-            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
-              <Mark>
-                <Icon>1</Icon>
-                <div>icon 1</div>
-              </Mark>
-              <Mark>
-                <Icon>2</Icon>
-                <div>icon 2 2354 21345</div>
-              </Mark>
-              <Mark>
-                <Icon>3</Icon>
-                <div>icon 3</div>
-              </Mark>
-              <Mark>
-                <Icon>4</Icon>
-                <div>icon 4</div>
-              </Mark>
-              <Mark>
-                <Icon>5</Icon>
-                <div>icon 5</div>
-              </Mark>
-              <Mark>
-                <Icon>6</Icon>
-                <div>icon 6</div>
-              </Mark>
-              <Mark>
-                <Icon>7</Icon>
-                <div>icon 7</div>
-              </Mark>
-              <Mark>
-                <Icon>8</Icon>
-                <div>icon 8</div>
-              </Mark>
-              <Mark>
-                <Icon>9</Icon>
-                <div>icon 9</div>
-              </Mark>
-            </GroupMarks>
-          </PageMarks>
-
-          <PageMarks bgColor={"#fafafa"}>
-            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
-              <Mark>
-                <Icon>1</Icon>
-                <div>icon 1</div>
-              </Mark>
-              <Mark>
-                <Icon>2</Icon>
-                <div>icon 2 2354 21345</div>
-              </Mark>
-              <Mark>
-                <Icon>3</Icon>
-                <div>icon 3</div>
-              </Mark>
-              <Mark>
-                <Icon>4</Icon>
-                <div>icon 4</div>
-              </Mark>
-              <Mark>
-                <Icon>5</Icon>
-                <div>icon 5</div>
-              </Mark>
-              <Mark>
-                <Icon>6</Icon>
-                <div>icon 6</div>
-              </Mark>
-              <Mark>
-                <Icon>7</Icon>
-                <div>icon 7</div>
-              </Mark>
-              <Mark>
-                <Icon>8</Icon>
-                <div>icon 8</div>
-              </Mark>
-              <Mark>
-                <Icon>9</Icon>
-                <div>icon 9</div>
-              </Mark>
-            </GroupMarks>
-            <GroupMarks width={viewSize.pageWidth} item={viewSize.pageItem}>
-              <Mark>
-                <Icon>1</Icon>
-                <div>icon 1</div>
-              </Mark>
-              <Mark>
-                <Icon>2</Icon>
-                <div>icon 2 2354 21345</div>
-              </Mark>
-              <Mark>
-                <Icon>3</Icon>
-                <div>icon 3</div>
-              </Mark>
-              <Mark>
-                <Icon>4</Icon>
-                <div>icon 4</div>
-              </Mark>
-              <Mark>
-                <Icon>5</Icon>
-                <div>icon 5</div>
-              </Mark>
-              <Mark>
-                <Icon>6</Icon>
-                <div>icon 6</div>
-              </Mark>
-              <Mark>
-                <Icon>7</Icon>
-                <div>icon 7</div>
-              </Mark>
-              <Mark>
-                <Icon>8</Icon>
-                <div>icon 8</div>
-              </Mark>
-              <Mark>
-                <Icon>9</Icon>
-                <div>icon 9</div>
-              </Mark>
-            </GroupMarks>
-          </PageMarks>
         </ListPages>
       </DivRound>
     </>
