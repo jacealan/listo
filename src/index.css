@@ -28,7 +28,7 @@ body {
   /* IE and Edge */
   -ms-overflow-style: none;
   /* Firefox */
-  scrollbar-width: none; 
+  /* scrollbar-width: none; */
 }
 /* Chrome, Safari, Opera*/
 ::-webkit-scrollbar {
