@@ -328,7 +328,7 @@ export const bookmarkObj = {
         {
           url: "https://www.youtube.com/channel/UCeI_Ji5Wc1YQvG2dCHZJINw",
           title: "MAX OAZO",
-          thumbnail: "",
+          thumbnail: "https://images.genius.com/8945e9f3b768af3b2ae2830f2c0cbe00.640x640x1.jpg",
           bgColor: "#222",
           color: "#eee",
         },
