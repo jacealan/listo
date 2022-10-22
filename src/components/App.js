@@ -42,24 +42,24 @@ function App() {
   })
   const onChangeSize = () => {
     const contentWidth =
-      document.documentElement.clientWidth < 1110
+      document.documentElement.clientWidth < 1140
         ? document.documentElement.clientWidth
-        : 1110
+        : 1140
     // console.log(contentWidth)
-    if (contentWidth === 1110) {
+    if (contentWidth === 1140) {
       setViewSize({
-        width: 1110,
+        width: 1140,
         height: document.documentElement.clientHeight,
         page: 2,
         pageWidth: 540,
         pageItem: 6,
       })
-    } else if (contentWidth >= 730) {
+    } else if (contentWidth >= 780) {
       setViewSize({
         width: contentWidth,
         height: document.documentElement.clientHeight,
         page: 2,
-        pageWidth: (contentWidth - 30) / 2,
+        pageWidth: (contentWidth - 60) / 2,
         pageItem: 4,
       })
     } else if (contentWidth >= 540) {

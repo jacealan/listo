@@ -11,6 +11,9 @@ export const Flex = styled.div`
   ${props => props.spaceAround && css`
     justify-content: space-around;
   `}
+  ${props => props.right && css`
+    justify-content: flex-end;
+  `}
   align-items: center;  
   text-align: cetner;
   ${props => props.button && css`
@@ -110,6 +113,9 @@ export const ListPages = styled.div`
   margin: 10px auto 0 auto;
   border-radius: 20px;
   padding: 10px 0;
+  ${props => props.page === 2 &&css`
+    padding: 10px 20px;
+  `}
   background-color: #ddd;
   ${props => props.bgColor && css`
     background-color: ${props.bgColor};
@@ -119,6 +125,7 @@ export const ListPages = styled.div`
   `}
   display: grid;
   grid-template-columns: repeat(${props => props.page}, 1fr);
+  gap: 20px;
 `
 
 export const PageMarks = styled(FlexColumn)`

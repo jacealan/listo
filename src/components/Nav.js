@@ -1,5 +1,6 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { authService, dbService } from "../fbase"
 
 import styled, { css } from "styled-components"
 
@@ -8,6 +9,7 @@ import { Flex } from "../styled-components-jace"
 // import { SquareRounded as Square } from "@styled-icons/boxicons-solid"
 import { Square, Grid } from "@styled-icons/evaicons-solid"
 import { UserRectangle } from "@styled-icons/boxicons-solid"
+import { Login, Logout } from "@styled-icons/heroicons-outline"
 
 import { userObj, dataObj } from "../testdata"
 
@@ -21,39 +23,61 @@ const Navigation = styled.div`
   border-radius: 0 0 10px 10px;
   background-color: #eee;
   color: #777;
-  display: flex;
-  justify-content: space-between;
-  align-contents: center;
+  display: grid;
+  grid-template-columns: 1fr 150px 1fr;
+  // align-contents: center;
 `
 
 const Nav = ({ userObj, viewSize, swipe }) => {
+  const navigate = useNavigate()
+
   return (
     <>
       <Navigation width={viewSize.width}>
-        <Flex>
-          <Link to="/">
+        <Link to="/">
+          <Flex>
             <Square size="24" color="#777" />
             &nbsp;
             {dataObj ? dataObj.title : "Title"}
-          </Link>
-        </Flex>
+          </Flex>
+        </Link>
+        <Link to="/">
+          <Flex center>
+            <Grid size="20" color="#777" />
+            LiSTo
+          </Flex>
+        </Link>
         <Flex right>
-          <Link to="/profile">
-            <UserRectangle size="20" color="#777" />
-            {userObj ? userObj.displayName : "Anonymous"}
-          </Link>
+          {userObj ? (
+            <>
+              <Link to="/profile">
+                <Flex>
+                  <UserRectangle size="20" color="#777" />
+                  &nbsp;
+                  {userObj.displayName}&nbsp;
+                </Flex>
+              </Link>
+              <Link>
+                <Flex>
+                  <Logout
+                    size="20"
+                    onClick={async () => {
+                      await authService.signOut()
+                      navigate("/")
+                      window.location.reload()
+                    }}
+                  />
+                </Flex>
+              </Link>
+            </>
+          ) : (
+            <>
+              "Anonymous "<Login size="20" />
+            </>
+          )}
           &nbsp;&nbsp;
-          <Grid size="20" color="#777" />
-          LiSTo
         </Flex>
       </Navigation>
-      {/* <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/profile">{userObj ? userObj.displayName : "Anonymous"}'s Profile</Link></li>
-      </ul>
-      <style jsx>{`
-
-      `}</style> */}
     </>
   )
 }
