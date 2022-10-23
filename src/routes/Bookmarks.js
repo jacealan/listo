@@ -83,7 +83,9 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
       ? JSON.parse(window.localStorage.getItem("notemark"))
       : notemarkObjTemplate
   )
-
+  console.log(usermarkObj)
+  console.log(bookmarkObj)
+  
   const [editPage, setEditPage] = useState(null)
   const [editIndex, setEditIndex] = useState({
     isEdit: false,
@@ -212,6 +214,7 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                 <>
                   <PageMarks key={pageIdx} bgColor={"#fafafa"}>
                     {bookmarkObj[id].pages.map((group, groupIdx) => (
+                      <>
                       <GroupMarks
                         key={groupIdx}
                         width={viewSize.pageWidth}
@@ -232,6 +235,7 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                           </Mark>
                         ))}
                       </GroupMarks>
+                      </>
                     ))}
                     <Flex center>
                       <Button>

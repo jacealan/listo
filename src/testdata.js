@@ -34,7 +34,7 @@ export const bookmarkObjTemplate = {
     createdAt: 11234567890,
     modifiedAt: 12938712398,
     updatedAt: 10987865453,
-    pages: ["group0", "group1", "group2", "group3", "group4"],
+    pages: ["group0", "group1", "group2", "group3"],
     group0: [
       {
         url: "https://naver.com/",
@@ -360,6 +360,9 @@ export const bookmarkObjTemplate = {
         bgColor: "#222",
         color: "#eee",
       },
+    ],
+    group3: [
+      
     ],
   },
 }
