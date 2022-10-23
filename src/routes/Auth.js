@@ -1,3 +1,6 @@
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
 import { authService } from "../fbase"
 import {
   createUserWithEmailAndPassword,
@@ -6,8 +9,6 @@ import {
   GithubAuthProvider,
   signInWithPopup,
 } from "firebase/auth"
-
-import React, { useState } from "react"
 
 import {
   Flex,
@@ -27,6 +28,8 @@ import { Square, Grid } from "@styled-icons/evaicons-solid"
 import { LogIn } from "@styled-icons/boxicons-solid"
 
 const Auth = () => {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [newAccount, setNewAccount] = useState(true)
@@ -58,6 +61,9 @@ const Auth = () => {
     } catch (error) {
       setError(error.message)
     }
+
+    navigate("/")
+    window.location.reload()
   }
   const toggleAccount = () => setNewAccount((prev) => !prev)
   const onSocialClick = async (event) => {
@@ -72,10 +78,14 @@ const Auth = () => {
       provider = new GithubAuthProvider()
     }
     const data = await signInWithPopup(authService, provider)
+    
+    navigate("/")
+    window.location.reload()
   }
 
   return (
-    <div>
+    <Flex center>
+      <div className="auth">
       <Flex center style={{ margin: "30px 0" }}>
         <Grid size="50" color="#444" />
         <span style={{ fontSize: "40px", fontWeight: 700 }}>LiSTo</span>
@@ -130,8 +140,11 @@ const Auth = () => {
         >
           Continue with Github
         </button>
-      </div>
+      </div></div>
       <style jsx>{`
+        .auth {
+          width: 360px;
+        }
         .auth_email {
           width: 360px;
           display: grid;
@@ -153,7 +166,7 @@ const Auth = () => {
           font-size: 18px;
         }
       `}</style>
-    </div>
+    </Flex>
   )
 }
 export default Auth

@@ -50,10 +50,12 @@ const Profile = ({ refreshUser, userObj }) => {
       })
       refreshUser()
     }
+    navigate("/")
+    window.location.reload()
   }
 
   return (
-    <>
+    <Flex center>
     <div className="profile">
       <Flex center style={{ margin: "30px 0" }}>
         <Grid size="50" color="#444" />
@@ -95,7 +97,7 @@ const Profile = ({ refreshUser, userObj }) => {
           font-size: 18px;
         }
       `}</style>
-    </>
+    </Flex>
   )
 }
 export default Profile

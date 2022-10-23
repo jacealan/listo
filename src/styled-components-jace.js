@@ -88,7 +88,7 @@ export const DivRound = styled.div`
   ${props => props.width && css`
     width: ${props.width}px;
   `}
-  margin: 10px auto 0 auto;
+  margin: 11px auto 0 auto;
   border-radius: 20px;
   padding: 10px 0;
   background-color: #f5f5f5;
@@ -104,6 +104,10 @@ export const DivRound = styled.div`
   ${props => props.button && css`
     cursor: pointer;
   `}
+`
+
+export const Button = styled.div`
+  cursor: pointer;
 `
 
 export const ListPages = styled.div`

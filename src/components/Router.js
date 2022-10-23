@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Auth from "../routes/Auth"
-import Home from "../routes/Home"
+import Bookmarks from "../routes/Bookmarks"
 import Profile from "../routes/Profile"
 import { financemarkObj } from "../testdata"
 import Nav from "./Nav"
@@ -20,16 +20,16 @@ import Nav from "./Nav"
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj, viewSize, swipe }) => {
   return (
-    <Router>
-      {isLoggedIn && <Nav userObj={userObj} viewSize={viewSize} swipe={swipe} />}
-      <Routes>
-        {isLoggedIn ? (
+    <div>
+      <Router>
+        <Routes>
           <>
             <Route
               exact
               path="/"
-              element={
-                <Home userObj={userObj} viewSize={viewSize} swipe={swipe} />
+              element={<>
+                <Nav userObj={userObj} viewSize={viewSize} swipe={swipe} />
+                <Bookmarks userObj={userObj} viewSize={viewSize} swipe={swipe} /></>
               }
             />
             <Route
@@ -44,12 +44,22 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj, viewSize, swipe }) => {
                 />
               }
             />
+            <Route
+              exact
+              path="/auth"
+              element={
+                <Auth
+                  // userObj={userObj}
+                  refreshUser={refreshUser}
+                  viewSize={viewSize}
+                  swipe={swipe}
+                />
+              }
+            />
           </>
-        ) : (
-          <Route exact path="/" element={<Auth />} />
-        )}
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>
+    </div>
   )
 }
 
