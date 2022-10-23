@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(authService, (user) => {
       if (user) {
-        console.log(user)
         setUserObj({
           displayName: user.displayName,
           uid: user.uid,

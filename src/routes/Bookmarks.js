@@ -48,6 +48,7 @@ import {
   financemarkObjTemplate,
   notemarkObjTemplate,
 } from "../testdata"
+import { uuidv4 } from "@firebase/util"
 // console.log(userObj, dataObj)
 
 const Bookmarks = ({ userObj, viewSize, swipe }) => {
@@ -85,7 +86,7 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
   )
   console.log(usermarkObj)
   console.log(bookmarkObj)
-  
+
   const [editPage, setEditPage] = useState(null)
   const [editIndex, setEditIndex] = useState({
     isEdit: false,
@@ -130,6 +131,37 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
     await setDoc(docRef, bookmarkObj[bookmarkId])
     // const docRef = await addDoc(collection(dbService, "usermarks", userObj.uid), usermarkObj)
     // console.log("Document written with ID: ", docRef.id);
+  }
+
+  const addPage = () => {
+    const createdAt = new Date()
+    const newUuid = uuid()
+    const newBookmarkObj = bookmarkObj
+    newBookmarkObj[newUuid] = {
+      modifiedId: userObj.uid,
+      authorId: userObj.uid,
+      createdAt: createdAt,
+      modifiedAt: createdAt,
+      updatedAt: createdAt,
+      pages: ["group0", "group1", "group2", "group3"],
+      group0: [
+        {
+          url: "https://naver.com/",
+          title: "네이버",
+          thumbnail:
+            "https://user-images.githubusercontent.com/69343830/102716411-1c227700-431f-11eb-86e6-dd389b690681.png",
+          bgColor: "#aaa",
+          color: "#444",
+        },  
+      ],
+      group1: [],
+      group2: [],
+      group3: [],
+    }
+    setBookmarkObj(JSON.parse(JSON.stringify(newBookmarkObj)))
+    const newUsermarkObj = usermarkObj
+    newUsermarkObj.bookmarks.push(newUuid)
+    setUsermarkObj(JSON.parse(JSON.stringify(newUsermarkObj)))
   }
 
   const [word, setWord] = useState("")
@@ -215,42 +247,51 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                   <PageMarks key={pageIdx} bgColor={"#fafafa"}>
                     {bookmarkObj[id].pages.map((group, groupIdx) => (
                       <>
-                      <GroupMarks
-                        key={groupIdx}
-                        width={viewSize.pageWidth}
-                        item={viewSize.pageItem}
-                      >
-                        {bookmarkObj[id][group].map((mark, markIdx) => (
-                          <Mark key={markIdx}>
-                            <a href={mark.url} target="_blank" rel="noreferrer">
-                              {mark.thumbnail ? (
-                                <Icon src={mark.thumbnail} width="78" />
-                              ) : (
-                                <Icon bgColor={mark.bgColor} color={mark.color}>
-                                  {mark.title}
-                                </Icon>
-                              )}
-                            </a>
-                            <div>{mark.title}</div>
-                          </Mark>
-                        ))}
-                      </GroupMarks>
+                        <GroupMarks
+                          key={groupIdx}
+                          width={viewSize.pageWidth}
+                          item={viewSize.pageItem}
+                        >
+                          {bookmarkObj[id][group].map((mark, markIdx) => (
+                            <Mark key={markIdx}>
+                              <a
+                                href={mark.url}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {mark.thumbnail ? (
+                                  <Icon src={mark.thumbnail} width="78" />
+                                ) : (
+                                  <Icon
+                                    bgColor={mark.bgColor}
+                                    color={mark.color}
+                                  >
+                                    {mark.title}
+                                  </Icon>
+                                )}
+                              </a>
+                              <div>{mark.title}</div>
+                            </Mark>
+                          ))}
+                        </GroupMarks>
                       </>
                     ))}
                     <Flex center>
                       <Button>
-                      <UploadCloud
-                        onClick={() => uploadCloud(id)}
-                        size="20"
-                        color="#aaa"
-                      /></Button>
+                        <UploadCloud
+                          onClick={() => uploadCloud(id)}
+                          size="20"
+                          color="#aaa"
+                        />
+                      </Button>
                       &nbsp;&nbsp;&nbsp;
                       <Button>
-                      <TableEdit
-                        onClick={() => setEditPage(pageIdx)}
-                        size="20"
-                        color="#aaa"
-                      /></Button>
+                        <TableEdit
+                          onClick={() => setEditPage(pageIdx)}
+                          size="20"
+                          color="#aaa"
+                        />
+                      </Button>
                     </Flex>
                   </PageMarks>
                 </>
@@ -318,6 +359,12 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
               )}
             </>
           ))}
+          <Flex
+            center
+            style={viewSize.page === 2 ? { gridColumn: "1 / 3" } : null}
+          >
+            <Button><AddBox size="20" onClick={addPage} /></Button>
+          </Flex>
         </ListPages>
       </DivRound>
 

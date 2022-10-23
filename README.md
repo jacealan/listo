@@ -21,6 +21,9 @@ https://listo-jace.vercel.app/
 - ReactPlayer:
   - https://cookpete.com/react-player/
   - https://github.com/CookPete/react-player
+- uuid:
+  - https://github.com/uuidjs/uuid
+  
 
 ## Support
 - Noembed: https://noembed.com/
