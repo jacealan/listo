@@ -1,6 +1,9 @@
 import styled, {css} from "styled-components"
 
 export const Flex = styled.div`
+  ${props => props.width && css`
+    width: ${props.width}px;
+  `}
   display: flex;
   ${props => props.center && css`
     justify-content: center;
@@ -162,6 +165,7 @@ export const GroupMarks = styled.div`
 `
 
 export const Mark = styled.div`
+  position: relative;
   height: 110px;
   max-width: 80px;
   margin-top: 10px;

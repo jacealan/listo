@@ -37,7 +37,10 @@ import {
 import {
   TableEdit,
   CheckboxChecked,
+  CircleEdit,
 } from "@styled-icons/fluentui-system-filled"
+import { DeleteForever } from "@styled-icons/material"
+import { PencilAlt } from "@styled-icons/heroicons-solid"
 
 import {
   userObjTemplate,
@@ -84,8 +87,8 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
       ? JSON.parse(window.localStorage.getItem("notemark"))
       : notemarkObjTemplate
   )
-  console.log(usermarkObj)
-  console.log(bookmarkObj)
+  // console.log(usermarkObj)
+  // console.log(bookmarkObj)
 
   const [editPage, setEditPage] = useState(null)
   const [editIndex, setEditIndex] = useState({
@@ -109,28 +112,38 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
       bgColor: editIndex.bgColor,
       color: editIndex.color,
     })
-    console.log(tempObj)
-    setEditIndex({ ...editIndex, isEdit: false })
+    setEditIndex({ ...editIndex, isAdd: false })
     // setBookmarkObj()
   }
-  const editCancle = () => {
+  const editMark = () => {
+    const tempObj = bookmarkObj
+    bookmarkObj[editIndex.pageIdx][editIndex.groupIdx][editIndex.markIdx] = {
+      url: editIndex.url,
+      title: editIndex.title,
+      thumbnail: editIndex.thumbnail,
+      bgColor: editIndex.bgColor,
+      color: editIndex.color,
+    }
     setEditIndex({ ...editIndex, isEdit: false })
-    setEditPage(null)
+  }
+  const deleteMark = () => {
+    bookmarkObj[editIndex.pageIdx][editIndex.groupIdx].splice(
+      editIndex.markIdx,
+      1
+    )
+    setBookmarkObj(JSON.parse(JSON.stringify(bookmarkObj)))
+  }
+  const editCancle = () => {
+    setEditIndex({ ...editIndex, isAdd: false, isEdit: false })
   }
 
   const downloadCloud = async () => {
     const docRef = doc(dbService, "bookmarks", editIndex.pagdIdx)
     const docSnap = await getDoc(docRef)
-    console.log(docSnap.data())
   }
   const uploadCloud = async (bookmarkId) => {
-    console.log(bookmarkId)
-    console.log(bookmarkObj[bookmarkId])
-    console.log(usermarkObj)
     const docRef = doc(dbService, "bookmarks", bookmarkId)
     await setDoc(docRef, bookmarkObj[bookmarkId])
-    // const docRef = await addDoc(collection(dbService, "usermarks", userObj.uid), usermarkObj)
-    // console.log("Document written with ID: ", docRef.id);
   }
 
   const addPage = () => {
@@ -152,7 +165,7 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
             "https://user-images.githubusercontent.com/69343830/102716411-1c227700-431f-11eb-86e6-dd389b690681.png",
           bgColor: "#aaa",
           color: "#444",
-        },  
+        },
       ],
       group1: [],
       group2: [],
@@ -162,6 +175,12 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
     const newUsermarkObj = usermarkObj
     newUsermarkObj.bookmarks.push(newUuid)
     setUsermarkObj(JSON.parse(JSON.stringify(newUsermarkObj)))
+  }
+  const deletePage = (id) => {
+    // usermarkObj.bookmarks = usermarkObj.bookmarks.splice(editPage, 1)
+    usermarkObj.bookmarks.splice(editPage, 1)
+    console.log(usermarkObj)
+    setUsermarkObj(JSON.parse(JSON.stringify(usermarkObj)))
   }
 
   const [word, setWord] = useState("")
@@ -305,17 +324,44 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                         item={viewSize.pageItem}
                       >
                         {bookmarkObj[id][group].map((mark, markIdx) => (
-                          <Mark key={markIdx}>
-                            <a href={mark.url} target="_blank" rel="noreferrer">
-                              {mark.thumbnail ? (
-                                <Icon src={mark.thumbnail} width="78" />
-                              ) : (
-                                <Icon bgColor={mark.bgColor} color={mark.color}>
-                                  {mark.title}
-                                </Icon>
-                              )}
-                            </a>
+                          <Mark
+                            key={markIdx}
+                            onClick={() => {
+                              setEditIndex({
+                                isAdd: false,
+                                isEdit: true,
+                                pageIdx: id,
+                                groupIdx: group,
+                                markIdx: markIdx,
+                                url: mark.url,
+                                title: mark.title,
+                                thumbnail: mark.thumbnail,
+                                bgColor: mark.bgColor,
+                                color: mark.color,
+                              })
+                              console.log(editIndex)
+                            }}
+                          >
+                            {mark.thumbnail ? (
+                              <Icon src={mark.thumbnail} width="78" />
+                            ) : (
+                              <Icon bgColor={mark.bgColor} color={mark.color}>
+                                {mark.title}
+                              </Icon>
+                            )}
                             <div>{mark.title}</div>
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: 20,
+                                left: 20,
+                                // backgroundColor: "#ccc",
+                                // boxShadow: "1px 1px 6px -1px #ccc",
+                                opacity: "0.6",
+                              }}
+                            >
+                              <PencilAlt size="24" color="#111" />
+                            </div>
                           </Mark>
                         ))}
                         {group.length < 12 && (
@@ -323,7 +369,8 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                             key="add"
                             onClick={() => {
                               setEditIndex({
-                                isEdit: true,
+                                isAdd: true,
+                                isEdit: false,
                                 pageIdx: id,
                                 groupIdx: group,
                                 markIdx: bookmarkObj[id][group].length,
@@ -341,19 +388,29 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
                         )}
                       </GroupMarks>
                     ))}
-                    <Button>
-                      <CheckboxChecked
-                        onClick={() => {
-                          window.localStorage.setItem(
-                            "bookmark",
-                            JSON.stringify(bookmarkObj)
-                          )
-                          setEditPage(null)
-                        }}
-                        size="24"
-                        color="#aaa"
-                      />
-                    </Button>
+                    <Flex center>
+                      <Button>
+                        <DeleteForever
+                          onClick={() => deletePage(id)}
+                          size="26"
+                          color="#aaa"
+                        />
+                      </Button>
+                      &nbsp;&nbsp;&nbsp;
+                      <Button>
+                        <CheckboxChecked
+                          onClick={() => {
+                            window.localStorage.setItem(
+                              "bookmark",
+                              JSON.stringify(bookmarkObj)
+                            )
+                            setEditPage(null)
+                          }}
+                          size="24"
+                          color="#aaa"
+                        />
+                      </Button>
+                    </Flex>
                   </PageMarks>
                 </>
               )}
@@ -363,15 +420,17 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
             center
             style={viewSize.page === 2 ? { gridColumn: "1 / 3" } : null}
           >
-            <Button><AddBox size="20" onClick={addPage} /></Button>
+            <Button>
+              <AddBox size="20" onClick={addPage} />
+            </Button>
           </Flex>
         </ListPages>
       </DivRound>
 
       {/* ---- */}
-      {/* EDIT */}
+      {/* ADD */}
       {/* ---- */}
-      <div className="edit">
+      <div className="add">
         <div className="cancel" onClick={editCancle} />
         <div className="cancel" onClick={editCancle} />
         <div className="cancel" onClick={editCancle} />
@@ -489,7 +548,158 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
         <div className="cancel" onClick={editCancle} />
         <div className="cancel" onClick={editCancle} />
       </div>
+
+      {/* ---- */}
+      {/* EDIT */}
+      {/* ---- */}
+      <div className="edit">
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+        <div className="edit-content">
+          <div className="edit-icon">
+            <Flex center width="340">
+              <Mark>
+                {/* {editIndex !== null ? (
+                <>
+                  {editIndex.pageIdx},{editIndex.groupIdx},{editIndex.markIdx}
+                </>
+              ) : null} */}
+                {editIndex.thumbnail ? (
+                  <Icon src={editIndex.thumbnail} width="78" />
+                ) : (
+                  <Icon bgColor={editIndex.bgColor} color={editIndex.color}>
+                    {editIndex.title}
+                  </Icon>
+                )}
+                <div>{editIndex.title}</div>
+              </Mark>
+            </Flex>
+          </div>
+          <form className="edit-form">
+            <div>URL</div>
+            <div>
+              <Input
+                type="text"
+                placeholder="https://listo-jace.vercel.app"
+                value={editIndex.url}
+                width={230}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event
+                  setEditIndex({ ...editIndex, url: value })
+                }}
+              />
+            </div>
+            <div>TITLE</div>
+            <div>
+              <Input
+                type="text"
+                placeholder="Input Title"
+                value={editIndex.title}
+                width={230}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event
+                  setEditIndex({ ...editIndex, title: value })
+                }}
+              />
+            </div>
+            <div>IMAGE</div>
+            <div>
+              <Input
+                type="text"
+                placeholder="Input Image Url"
+                value={editIndex.thumbnail}
+                width={230}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event
+                  setEditIndex({ ...editIndex, thumbnail: value })
+                }}
+              />
+            </div>
+            <div>BGCLR</div>
+            <div>
+              <Input
+                type="text"
+                placeholder="Input Icon Background Color(#RRGGBB)"
+                value={editIndex.bgColor}
+                width={230}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event
+                  setEditIndex({ ...editIndex, bgColor: value })
+                }}
+              />
+            </div>
+            <div>COLOR</div>
+            <div>
+              <Input
+                type="text"
+                placeholder="Input Icon Text Color(#RRGGBB)"
+                value={editIndex.color}
+                width={230}
+                onChange={(event) => {
+                  const {
+                    target: { value },
+                  } = event
+                  setEditIndex({ ...editIndex, color: value })
+                }}
+              />
+            </div>
+            <Flex spaceAround width="300">
+              <DivRound
+                button
+                onClick={deleteMark}
+                type="submit"
+                value="Delete Mark"
+                bgColor="#777"
+                color="#ccc"
+                width="140"
+              >
+                DELETE
+              </DivRound>
+              <DivRound
+                button
+                onClick={editMark}
+                type="submit"
+                value="Edit Mark"
+                bgColor="#777"
+                color="#ccc"
+                width="140"
+              >
+                EDIT
+              </DivRound>
+            </Flex>
+          </form>
+        </div>
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+        <div className="cancel" onClick={editCancle} />
+      </div>
+
       <style jsx>{`
+        .add {
+          display: ${editIndex.isAdd ? "grid" : "none"};
+          grid-template-columns: 1fr 340px 1fr;
+          grid-template-rows: 1fr 360px 1fr;
+          z-index: 10;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: ${document.documentElement.clientWidth}px;
+          height: ${document.documentElement.clientHeight}px;
+          border-radius: 10px;
+          box-shadow: 1px 1px 6px 3px #bbb;
+          background-color: rgba(100, 100, 100, 0.8);
+        }
         .edit {
           display: ${editIndex.isEdit ? "grid" : "none"};
           grid-template-columns: 1fr 340px 1fr;
@@ -505,14 +715,14 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
           background-color: rgba(100, 100, 100, 0.8);
         }
         .edit-icon {
-          height: 90px;
+          height: 110px;
         }
         .edit-content {
-          display: ${editIndex.isEdit ? "block" : "none"};
+          display: ${editIndex.isEdit || editIndex.isAdd ? "block" : "none"};
           // justify-content: center;
           // align-items: center;
           width: 340px;
-          padding: 20px;
+          padding: 10px 20px;
           border-radius: 10px;
           box-shadow: 1px 1px 6px 3px #bbb;
           background-color: #fff;
