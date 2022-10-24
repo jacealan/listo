@@ -158,14 +158,6 @@ const Bookmarks = ({ userObj, viewSize, swipe }) => {
       updatedAt: createdAt,
       pages: ["group0", "group1", "group2", "group3"],
       group0: [
-        {
-          url: "https://naver.com/",
-          title: "네이버",
-          thumbnail:
-            "https://user-images.githubusercontent.com/69343830/102716411-1c227700-431f-11eb-86e6-dd389b690681.png",
-          bgColor: "#aaa",
-          color: "#444",
-        },
       ],
       group1: [],
       group2: [],
