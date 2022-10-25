@@ -6,6 +6,7 @@ const bookmarkUuid1 = uuid()
 const bookmarkUuid2 = uuid()
 
 export const userObjTemplate = {
+  isUser: false,
   uid: userUuid,
   displayName: "Jace",
   email: "jacealan1@gmail.com",
@@ -39,6 +40,7 @@ bookmarkObjTemplate[bookmarkUuid1] = {
   createdAt: now,
   modifiedAt: now,
   updatedAt: now,
+  category: "bookmark",
   pages: ["group0", "group1", "group2", "group3"],
   group0: [
     {
@@ -224,6 +226,7 @@ bookmarkObjTemplate[bookmarkUuid2] = {
   createdAt: now,
   modifiedAt: now,
   updatedAt: now,
+  category: "bookmark",
   pages: ["group0", "group1", "group2", "group3"],
   group0: [
     {

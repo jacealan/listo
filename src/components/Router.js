@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Auth from "../routes/Auth"
 import Bookmarks from "../routes/Bookmarks"
 import Profile from "../routes/Profile"
+import Share from "../routes/Share"
 import { financemarkObj } from "../testdata"
 import Nav from "./Nav"
 
@@ -49,6 +50,18 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj, viewSize, swipe }) => {
               path="/auth"
               element={
                 <Auth
+                  // userObj={userObj}
+                  refreshUser={refreshUser}
+                  viewSize={viewSize}
+                  swipe={swipe}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/:shardId"
+              element={
+                <Share
                   // userObj={userObj}
                   refreshUser={refreshUser}
                   viewSize={viewSize}
